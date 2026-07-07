@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Plush Kaisen Wiki</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+margin:0;
+background:#08000f;
+color:white;
+}
+
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+width:150px;
+height:100%;
+background:#160022;
+border-right:2px solid #7722aa;
+padding-top:20px;
+}
+
+.logo{
+text-align:center;
+color:#d28aff;
+font-weight:bold;
+font-size:18px;
+}
+
+button{
+display:block;
+width:120px;
+margin:15px auto;
+padding:10px;
+background:#26003d;
+color:white;
+border:1px solid #8c38ff;
+border-radius:10px;
+cursor:pointer;
+}
+
+button:hover{
+background:#61209b;
+}
+
+.main{
+margin-left:170px;
+padding:25px;
+}
+
+h1{
+color:#d28aff;
+}
+
+.card{
+background:#170022;
+border:1px solid #7020a0;
+border-radius:15px;
+padding:15px;
+margin:15px 0;
+box-shadow:0 0 15px #24003b;
+}
+
+.click{
+color:#d28aff;
+cursor:pointer;
+}
+
+.click:hover{
+color:white;
+}
+
+input{
+padding:12px;
+background:#100018;
+color:white;
+border:1px solid #8c38ff;
+border-radius:10px;
+}
+
+.hidden{
+display:none;
+}
+
+</style>
+
+</head>
+<section id="news" class="hidden">
+
+<h1>
+📰 Breaking News
+</h1>
+
+
+<div class="card">
+
+<p>
+Enter a character and Freddy will create a headline.
+</p>
+
+
+<input id="newsCharacter" placeholder="Character name">
+
+
+<button onclick="generateNews()">
+Broadcast
+</button>
+
+
+</div>
+
+
+<div id="newsFeed"></div>
+
+
+</section>
+
+
+
+
+
+<section id="lore" class="hidden">
+
+
+<h1>
+📖 Lore
+</h1>
+
+
+<div class="card">
+
+<p>
+Plush Kaisen is a universe where plush warriors awaken cursed energy and create unique cursed techniques.
+</p>
+
+
+<p>
+Powerful fighters develop domains that reshape battles.
+</p>
+
+
+<p>
+Every character has their own abilities, personalities, and stories.
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+</div>
+
+
+
+
+<script>
+
+
+function page(name){
+
+document.querySelectorAll("section")
+.forEach(x=>x.classList.add("hidden"));
+
+
+document.getElementById(name)
+.classList.remove("hidden");
+
+}
+
+
+
+
+
+const characters = {
+
+
+bonnie:{
+name:"Bonnie",
+grade:"Unknown",
+technique:"Gaming Cursed Technique",
+domain:"Digital Battlefield",
+facts:[
+"He loves video games"
+]
+
+},
+
+
+nightmare:{
+name:"Nightmare Bonnie",
+grade:"Special Grade",
+technique:"Cursed Energy Devour",
+domain:"Devouring Maw",
+facts:[
+"He is the reason his dad has no big toe"
+]
+
+},
+
+
+monty:{
+name:"Monty",
+grade:"Grade 2",
+technique:"Ruin Drive",
+domain:"Crushing Pit",
+facts:[
+"His type is a medium woman"
+]
+
+},
+
+
+foxy:{
+name:"Foxy",
+grade:"Grade 1",
+technique:"Strategic Combat",
+domain:"Pirates Cove",
+facts:[
+"He is one of the smartest fighters"
+]
+
+},
+
+
+puppet:{
+name:"Puppet",
+grade:"Unknown",
+technique:"Cloning",
+domain:"Uncanny Replica Theater",
+facts:[
+"He sent a shed into space on accident"
+]
+
+},
+
+
+freddy:{
+name:"Freddy",
+grade:"Grade 1",
+technique:"Broadcast Technique",
+domain:"News Network",
+facts:[
+"He is 4'11"
+]
+
+},
+
+
+chica:{
+name:"Chica",
+grade:"Unknown",
+technique:"Pots and Pans",
+domain:"Kitchen Showdown",
+facts:[
+"She secretly watches anime",
+"Her favorite anime is Death Note",
+"Her technique is basically construction but more efficient with energy when locked in"
+]
+
+}
+
+
+};
+
+
+
+
+
+
+
+function openCharacter(id){
+
+let c = characters[id];
+
+
+document.getElementById("characterCard").innerHTML = `
+
+<div class="card">
+
+<h1>${c.name}</h1>
+
+
+<p>
+<b>Grade:</b> ${c.grade}
+</p>
+
+
+<p>
+<b>Cursed Technique:</b> ${c.technique}
+</p>
+
+
+<p>
+<b>Domain Expansion:</b> ${c.domain}
+</p>
+
+
+<h2>✨ Fun Facts</h2>
+
+
+<ul>
+
+${c.facts.map(x=>`
+<li>${x}</li>
+`).join("")}
+
+</ul>
+
+
+</div>
+
+`;
+
+}
+
+
+
+
+
+
+
+function searchCharacters(){
+
+let text =
+document.getElementById("search")
+.value
+.toLowerCase();
+
+
+let output="";
+
+
+for(let id in characters){
+
+let c=characters[id];
+
+
+if(c.name.toLowerCase().includes(text)){
+
+
+output+=`
+
+<div class="card">
+
+<h2 class="click"
+onclick="openCharacter('${id}')">
+
+${c.name}
+
+</h2>
+
+</div>
+
+`;
+
+}
+
+
+}
+
+
+document.getElementById("results").innerHTML=output;
+
+
+}
+
+
+
+
+
+
+
+function battle(){
+
+let a =
+document.getElementById("fighter1")
+.value
+.toLowerCase();
+
+
+let b =
+document.getElementById("fighter2")
+.value
+.toLowerCase();
+
+
+
+let result="";
+
+
+if(a.includes("nightmare") || b.includes("nightmare")){
+
+result="Nightmare Bonnie wins 🟣";
+
+}
+
+
+else if(a.includes("monty") || b.includes("monty")){
+
+result="Monty wins 🐊";
+
+}
+
+
+else if(a.includes("foxy") || b.includes("foxy")){
+
+result="Foxy wins 🦊";
+
+}
+
+
+else if(a.includes("chica") || b.includes("chica")){
+
+result="Chica wins 🍗";
+
+}
+
+
+else{
+
+result="Too close to decide!";
+
+}
+
+
+document.getElementById("winner").innerHTML=result;
+
+}
+
+
+
+
+
+
+
+function generateNews(){
+
+let character =
+document.getElementById("newsCharacter")
+.value;
+
+
+
+if(character===""){
+return;
+}
+
+
+
+let headlines=[
+
+"has awakened a new cursed technique!",
+
+"has entered a dangerous battle!",
+
+"has challenged another fighter!",
+
+"has caused chaos in the Plush Kaisen world!",
+
+"has reached a new power level!",
+
+"has been spotted training their domain!",
+
+"has discovered something mysterious!"
+
+];
+
+
+
+let random = headlines[
+Math.floor(Math.random()*headlines.length)
+];
+
+
+
+document.getElementById("newsFeed").innerHTML += `
+
+
+<div class="card">
+
+<h2>
+🚨 BREAKING NEWS 🚨
+</h2>
+
+
+<h3>
+${character} ${random}
+</h3>
+
+
+<p>
+🎤 Freddy Reports: More information coming soon...
+</p>
+
+
+</div>
+
+
+`;
+
+
+
+document.getElementById("newsCharacter").value="";
+
+
+}
+
+
+
+</script>
+
+
+</body>
+</html>
+<body>
+
+
+<div class="sidebar">
+
+<div class="logo">
+🧸<br>
+PLUSH<br>
+KAISEN
+</div>
+
+
+<button onclick="page('home')">
+Home
+</button>
+
+<button onclick="page('characters')">
+Characters
+</button>
+
+<button onclick="page('matchups')">
+Matchups
+</button>
+
+<button onclick="page('news')">
+Breaking News
+</button>
+
+<button onclick="page('lore')">
+Lore
+</button>
+
+
+</div>
+
+
+
+<div class="main">
+
+
+<section id="home">
+
+<h1>🧸 Plush Kaisen</h1>
+
+<p>
+The cursed plush universe wiki.
+</p>
+
+
+<input id="search"
+placeholder="Search characters..."
+onkeyup="searchCharacters()">
+
+
+<div id="results"></div>
+
+
+</section>
+
+
+
+<section id="characters" class="hidden">
+
+<h1>Characters</h1>
+
+
+<div class="card">
+
+<h2 class="click" onclick="openCharacter('bonnie')">
+Bonnie
+</h2>
+
+<h2 class="click" onclick="openCharacter('nightmare')">
+Nightmare Bonnie
+</h2>
+
+<h2 class="click" onclick="openCharacter('monty')">
+Monty
+</h2>
+
+<h2 class="click" onclick="openCharacter('foxy')">
+Foxy
+</h2>
+
+<h2 class="click" onclick="openCharacter('puppet')">
+Puppet
+</h2>
+
+<h2 class="click" onclick="openCharacter('freddy')">
+Freddy
+</h2>
+
+<h2 class="click" onclick="openCharacter('chica')">
+Chica
+</h2>
+
+</div>
+
+
+<div id="characterCard"></div>
+
+</section>
+
+
+
+<section id="matchups" class="hidden">
+
+<h1>⚔️ Matchups</h1>
+
+
+<input id="fighter1" placeholder="Fighter 1">
+
+<input id="fighter2" placeholder="Fighter 2">
+
+
+<button onclick="battle()">
+Fight
+</button>
+
+
+<div class="card">
+
+<h2 id="winner">
+Waiting...
+</h2>
+
+</div>
+
+</section>
