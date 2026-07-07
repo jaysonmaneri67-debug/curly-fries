@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Plush Kaisen Wiki</title>
+
+<style>
+
+body {
+    margin:0;
+    background:#111;
+    color:white;
+    font-family:Arial, sans-serif;
+}
+
+
+/* TOP WIKI HEADER */
+
+.topbar {
+
+    height:70px;
+    background:#202020;
+    display:flex;
+    align-items:center;
+    padding-left:20px;
+    border-bottom:1px solid #444;
+
+}
+
+
+.logo {
+
+    font-size:30px;
+    font-weight:bold;
+    color:#b76cff;
+
+}
+
+
+
+/* LAYOUT */
+
+.layout {
+
+    display:flex;
+
+}
+
+
+
+/* SIDEBAR */
+
+.sidebar {
+
+    width:220px;
+    background:#181818;
+    min-height:calc(100vh - 70px);
+    padding:20px;
+
+}
+
+
+
+.sidebar h3 {
+
+    color:#b76cff;
+
+}
+
+
+
+.sidebar button {
+
+    width:100%;
+    margin:8px 0;
+    padding:12px;
+
+    background:#292929;
+    color:white;
+
+    border:none;
+    text-align:left;
+
+    cursor:pointer;
+
+}
+
+
+
+.sidebar button:hover {
+
+    background:#4b0082;
+
+}
+
+
+
+/* MAIN CONTENT */
+
+.main {
+
+    flex:1;
+    padding:30px;
+
+}
+
+
+
+.page-title {
+
+    font-size:38px;
+    border-bottom:2px solid #555;
+    padding-bottom:10px;
+
+}
+
+
+
+/* SEARCH */
+
+input {
+
+    padding:12px;
+    width:60%;
+
+    background:#222;
+    border:1px solid #555;
+    color:white;
+
+}
+
+
+
+button {
+
+    background:#6a0dad;
+    color:white;
+
+    padding:12px;
+
+    border:none;
+    cursor:pointer;
+
+}
+
+
+
+/* CHARACTER CARDS */
+
+
+.card {
+
+    background:#202020;
+
+    border:1px solid #555;
+
+    margin-top:20px;
+
+    width:600px;
+
+}
+
+
+
+.card-title {
+
+    background:#4b0082;
+
+    padding:15px;
+
+    font-size:25px;
+
+    text-align:center;
+
+}
+
+
+
+.infobox {
+
+    padding:15px;
+
+    background:#151515;
+
+}
+
+
+
+.infobox p {
+
+    border-bottom:1px solid #333;
+
+    padding:8px;
+
+}
+
+
+
+.fact {
+
+    padding:15px;
+
+}
+
+
+
+.fact h3 {
+
+    color:#d8a7ff;
+
+}
+
+
+
+
+.hidden {
+
+    display:none;
+
+}
+
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="topbar">
+
+<div class="logo">
+📖 Plush Kaisen Wiki
+</div>
+
+</div>
+
+
+
+<div class="layout">
+
+
+<div class="sidebar">
+
+
+<h3>Navigation</h3>
+
+
+<button onclick="showSection('characters')">
+Characters
+</button>
+
+
+<button onclick="showSection('news')">
+Breaking News
+</button>
+
+
+<button onclick="showSection('facts')">
+Random Facts
+</button>
+
+
+<h3>Wiki Links</h3>
+
+
+<button>
+Lore
+</button>
+
+
+<button>
+Abilities
+</button>
+
+
+<button>
+Domains
+</button>
+
+
+</div>
+
+
+
+<div class="main">
+
+
+<section id="characters">
+
+
+<h1 class="page-title">
+Characters
+</h1>
+
+
+<input id="searchBox" placeholder="Search characters...">
+
+
+<button onclick="searchCharacter()">
+Search
+</button>
+
+
+<div id="characterResults">
+
+<p>Search for a character to view their page.</p>
+
+</div>
+
+
+</section>
+<section id="news" class="hidden">
+
+<h1 class="page-title">
+🚨 Breaking News
+</h1>
+
+
+<input id="newsName" placeholder="Enter headline...">
+
+
+<button onclick="generateNews()">
+Publish
+</button>
+
+
+<div id="newsOutput">
+
+</div>
+
+
+</section>
+
+
+
+
+<section id="facts" class="hidden">
+
+<h1 class="page-title">
+Random Facts
+</h1>
+
+
+<button onclick="randomFact()">
+Generate Fact
+</button>
+
+
+<p id="factOutput">
+
+</p>
+
+
+</section>
+
+
+
+</div>
+
+</div>
+
+
+
+
+<script>
+
+
+function showSection(sectionId){
+
+
+let sections = document.querySelectorAll("section");
+
+
+sections.forEach(section=>{
+
+section.classList.add("hidden");
+
+});
+
+
+document.getElementById(sectionId)
+.classList.remove("hidden");
+
+
+}
+
+
+
+
+const characters = [
+
+
+{
+
+name:"Bonnie",
+
+grade:"Special(needs)Grade",
+
+ability:"Silence of the great",
+
+domain:"Noise drowned out by the loud ring of silence",
+
+fact:"Bonnie used to go to a school called 'My 67 Academia'."
+
+},
+
+
+
+{
+
+name:"Nightmare Bonnie",
+
+grade:"Special Grade",
+
+ability:"Cursed Consumption",
+
+domain:"Devour of Doom",
+
+fact:"Nightmare Bonnie is the reason his dad is missing his big toe."
+
+},
+
+
+
+{
+
+name:"Monty",
+
+grade:"Semi Grade 1",
+
+ability:"Ruin Drive",
+
+domain:"nobody knows boiii",
+
+fact:"Monty's favorite type is a medium woman who is submissive."
+
+},
+
+
+
+{
+
+name:"Foxy",
+
+grade:"Grade 1",
+
+ability:"he lowk dont got one gng",
+
+domain:"he wishes🥹",
+
+fact:"Foxy is a regular smart dude who can see curses and use cursed energy."
+
+},
+
+
+
+{
+
+name:"Puppet",
+
+grade:"Grade 1",
+
+ability:"Cloning Technique",
+
+domain:"Uncanny Replica Theater",
+
+fact:"Puppet accidentally sent an entire Home Depot into space."
+
+},
+
+
+
+{
+
+name:"Freddy",
+
+grade:"Grade 1",
+
+ability:"Breaking News",
+
+domain:"Broadcast Domain",
+
+fact:"Freddy is 4'11."
+
+},
+
+
+
+{
+
+name:"Chica",
+
+grade:"Semi Special Grade",
+
+ability:"Pots And Pans",
+
+domain:"Hell's Kitchen",
+
+fact:"Chica secretly watches anime. Her favorite is Death Note."
+
+},
+
+
+
+{
+
+name:"Jackobonnie",
+
+grade:"Unknown",
+
+ability:"Idle decay",
+
+domain:"Unknown",
+
+fact:"Jackobonnie unironically dances to funk."
+
+},
+
+
+
+{
+
+name:"Broken Foxy",
+
+grade:"Unknown",
+
+ability:"Unknown",
+
+domain:"Unknown",
+
+fact:"Broken Foxy has one of the worst backstories."
+
+}
+
+
+];
+
+
+
+function searchCharacter(){
+
+
+let search = document
+.getElementById("searchBox")
+.value
+.toLowerCase();
+
+
+
+let results = characters.filter(character =>
+
+character.name.toLowerCase()
+.includes(search)
+
+);
+
+
+
+let output =
+document.getElementById("characterResults");
+
+
+
+output.innerHTML="";
+
+
+
+if(results.length===0){
+
+
+output.innerHTML="<p>No character found.</p>";
+
+return;
+
+
+}
+
+
+
+results.forEach(character=>{
+
+
+output.innerHTML += `
+
+
+<div class="card">
+
+
+<div class="card-title">
+
+${character.name}
+
+</div>
+
+
+
+<div class="infobox">
+
+
+<p><b>Grade:</b> ${character.grade}</p>
+
+
+<p><b>Cursed Technique:</b> ${character.ability}</p>
+
+
+<p><b>Domain Expansion:</b> ${character.domain}</p>
+
+
+
+</div>
+
+
+
+<div class="fact">
+
+
+<h3>📖 Trivia</h3>
+
+
+<p>
+
+${character.fact}
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+`;
+
+
+
+});
+
+
+
+}
+function generateNews(){
+
+
+let headline =
+document.getElementById("newsName").value;
+
+
+
+let output =
+document.getElementById("newsOutput");
+
+
+
+if(headline === ""){
+
+
+output.innerHTML =
+"<p>Please enter a headline.</p>";
+
+
+return;
+
+
+}
+
+
+
+output.innerHTML = `
+
+
+<div class="card">
+
+
+<div class="card-title">
+
+🚨 BREAKING NEWS 🚨
+
+</div>
+
+
+<div class="fact">
+
+<p>${headline}</p>
+
+</div>
+
+
+</div>
+
+
+`;
+
+
+
+document.getElementById("newsName").value="";
+
+
+}
+
+
+
+
+
+const facts = [
+
+
+"Nightmare Bonnie gained his power from food energy.",
+
+"Foxy can see curses and use cursed energy despite being a normal smart dude.",
+
+"Puppet's cloning ability can create fake copies.",
+
+"Freddy reports the chaos happening in the Plush Kaisen universe.",
+
+"Bonnie is the quiet onwe of the group.",
+
+"Monty uses Ruin Drive to increase his power.",
+
+"Chica secretly watches anime.",
+
+"Jackobonnie dances to funk seriously."
+
+"Broken foxy misses his brother"
+
+"Foxy resents his brother deeply"
+
+
+
+];
+
+
+
+
+function randomFact(){
+
+
+let random =
+
+facts[Math.floor(Math.random()*facts.length)];
+
+
+
+document.getElementById("factOutput")
+.innerHTML = random;
+
+
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>
