@@ -82,9 +82,23 @@ input {
 
 #characterResults p {
 
-    background: #333;
-    padding: 10px;
-    border-radius: 8px;
+    .card {
+
+background:#333;
+margin:15px;
+padding:15px;
+border-radius:15px;
+border:2px solid purple;
+
+}
+
+
+.card h3 {
+
+color:#c77dff;
+font-size:25px;
+
+};
 
 }
 
@@ -139,9 +153,7 @@ footer {
 
     <button onclick="searchCharacter()">Search</button>
 
-    <div id="characterResults">
-        <p>Try searching for Bonnie, Monty, Foxy, Puppet, Freddy...</p>
-    </div>
+    <div id="characterResults"></div>
 </section>
 
 
@@ -185,44 +197,104 @@ function showSection(sectionId) {
 
 
 const characters = [
-    "Bonnie",
-    "Nightmare Bonnie",
-    "Monty",
-    "Foxy",
-    "Puppet",
-    "Freddy",
-    "Freddy Twin"
+
+{
+name:"Bonnie",
+grade:"Special Grade",
+ability:"Blind silence",
+domain:"Noise drowned out by the loud ring of silence"
+},
+
+{
+name:"Nightmare Bonnie",
+grade:"Special Grade",
+ability:"cursed consumption",
+domain:"Devour of doom"
+},
+
+{
+name:"Monty",
+grade:"Semi grade 1",
+ability:"Ruin Drive",
+domain:"See ya later alligator"
+},
+
+{
+name:"Foxy",
+grade:"Grade 1",
+ability:"Strategic Combat",
+domain:"Pirates Cove"
+},
+
+{
+name:"Puppet",
+grade:"Grade 1",
+ability:"Cloning Technique",
+domain:"Uncanny Replica Theater"
+},
+
+{
+name:"Freddy",
+grade:"Grade 1",
+ability:"Breaking News",
+domain:"Broadcast Domain"
+},
+
+{
+name:"Freddy Twin",
+grade:"Grade 20",
+ability:"being dumb af",
+domain:"he dont got one twinito"
+}
+
 ];
 
 
-function searchCharacter() {
+function searchCharacter(){
 
-    let search = document.getElementById("searchBox").value.toLowerCase();
+let search = document.getElementById("searchBox").value.toLowerCase();
 
-    let results = characters.filter(character =>
-        character.toLowerCase().includes(search)
-    );
+let results = characters.filter(character =>
+character.name.toLowerCase().includes(search)
+);
 
 
-    let output = document.getElementById("characterResults");
+let output = document.getElementById("characterResults");
 
-    if(results.length === 0) {
+output.innerHTML = "";
 
-        output.innerHTML = "<p>No character found.</p>";
 
-    } else {
+if(results.length === 0){
 
-        output.innerHTML = "";
+output.innerHTML="<p>No character found.</p>";
 
-        results.forEach(character => {
+return;
 
-            output.innerHTML += 
-            `<p>⭐ ${character}</p>`;
-
-        });
-    }
 }
 
+
+results.forEach(character=>{
+
+output.innerHTML += `
+
+<div class="card">
+
+<h3>${character.name}</h3>
+
+<p>⭐ ${character.grade}</p>
+
+<p>⚔️ Ability: ${character.ability}</p>
+
+<p>🏯 Domain: ${character.domain}</p>
+
+</div>
+
+`;
+
+});
+
+
+}
 
 
 function generateNews() {
