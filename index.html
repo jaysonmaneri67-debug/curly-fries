@@ -434,7 +434,7 @@ result="Too close to decide!";
 }
 
 
-document.getElementById("winner").innerHTML=result;
+document.getElementById("winner").innerHTML=result;1
 
 }
 
@@ -444,81 +444,27 @@ document.getElementById("winner").innerHTML=result;
 
 
 
-function generateNews(){
+<section id="news" class="hidden">
 
-let character =
-document.getElementById("newsCharacter")
-.value;
-
-
-
-if(character===""){
-return;
-}
-
-
-
-let headlines=[
-
-"has awakened a new cursed technique!",
-
-"has entered a dangerous battle!",
-
-"has challenged another fighter!",
-
-"has caused chaos in the Plush Kaisen world!",
-
-"has reached a new power level!",
-
-"has been spotted training their domain!",
-
-"has discovered something mysterious!"
-
-];
-
-
-
-let random = headlines[
-Math.floor(Math.random()*headlines.length)
-];
-
-
-
-document.getElementById("newsFeed").innerHTML += `
-
+<h1>
+📰 Breaking News
+</h1>
 
 <div class="card">
 
-<h2>
-🚨 BREAKING NEWS 🚨
-</h2>
+<p>Enter a character name:</p>
 
+<input id="newsCharacter" placeholder="Character name">
 
-<h3>
-${character} ${random}
-</h3>
-
-
-<p>
-🎤 Freddy Reports: More information coming soon...
-</p>
-
+<button onclick="generateNews()">
+Broadcast
+</button>
 
 </div>
 
+<div id="newsFeed"></div>
 
-`;
-
-
-
-document.getElementById("newsCharacter").value="";
-
-
-}
-
-
-
-</script>
+</section>
 
 
 </body>
